@@ -160,8 +160,8 @@ Iterable<TilePolygon> decodePolygons(List<int> geometry) {
       // We just decoded an interior ring.
 
       // Add the ring to the current polygon.
-      assert(rings != null);
-      rings!.add(TileLine(points));
+      // assert(rings != null);
+      rings?.add(TileLine(points));
     } else {
       // We just decoded an exterior ring.
 
@@ -176,7 +176,9 @@ Iterable<TilePolygon> decodePolygons(List<int> geometry) {
   }
 
   // The last polygon wont be completed in the decode loop, so yield it now.
-  assert(rings != null);
-  decoded.add(TilePolygon(rings!));
+  // assert(rings != null);
+  if (rings != null) {
+    decoded.add(TilePolygon(rings));
+  }
   return decoded;
 }
